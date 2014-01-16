@@ -1,0 +1,22 @@
+@()
+
+@main {
+  <h2>Config</h2>
+  
+  <h2>Users</h2>
+  <div id="users" ng-controller="Config.ConfigController">
+    <ul class="unstyled">
+      <li ng-repeat="user in users">
+        <button class="button-delete" ng-click="delete(user)">Delete</button>
+        
+        <span class="user">{{user.name}}</span>
+      </li>
+    </ul>
+    <form ng-submit="add()">
+      <input type="text" ng-model="inputUsername" size="30"
+         placeholder="user name"/>
+      <input class="button-submit" type="submit" value="add"/>
+      <span class="username-presence-{{contains(inputUsername)}}">User already exists</span>
+    </form>
+  </div>
+}
