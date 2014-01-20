@@ -1,0 +1,19 @@
+@(script: Html)(content: Html)
+
+<!DOCTYPE html>
+
+<html ng-app>
+    <head>
+        <title>TVTracker</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/angular-1.2.6.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/angular-route-1.2.6.min.js")" type="text/javascript"></script>
+        
+        @script
+    </head>
+    <body>
+        @content
+    </body>
+</html>

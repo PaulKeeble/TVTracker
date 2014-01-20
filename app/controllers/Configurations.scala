@@ -3,13 +3,12 @@ package controllers
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-
 import models.Configuration
 import models.User
-
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 import play.api.libs.json.Json._
+import models.Directory
 
 object Configurations extends Controller {
 
@@ -41,5 +40,25 @@ object Configurations extends Controller {
   def deleteUser(name:String) = Action { implicit request =>
     Configuration.delete(User(name))
     Ok("ok") 
+  }
+  
+  def getDirectory = Action { implicit request =>
+    val dir = Configuration.directory
+    val path = dir.map(_.path).getOrElse("")
+    val valid = dir.isDefined
+    
+    Ok(Json.obj("path"->path,"valid"->valid))
+  }
+  
+  def changeDirectory = Action(parse.json) { implicit request =>
+    implicit val rds = (__ \ 'path).read[String]
+    
+    request.body.validate.asOpt match {
+      case Some(path) => {
+        val success = Configuration.changeDirectory(Directory(path))
+        Ok(Json.obj("path"->path,"valid"->success)) 
+      }
+      case None => Status(503)
+    }
   }
 }

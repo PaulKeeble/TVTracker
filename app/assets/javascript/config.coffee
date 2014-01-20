@@ -23,13 +23,31 @@ Config.ConfigController = ($scope,$http) ->
     $http.delete('/configuration/users/'+user.name).success((data) ->
       updateUsers()
     )
-    # filteredUsers = (u for u in $scope.users when u.name != user.name)
-    # $scope.users = filteredUsers
   
   $scope.contains = (username) ->
     filteredUsers = (u for u in $scope.users when u.name == username)
     filteredUsers.length >0
-
+ 
+  
+  $scope.seriesDirectory = {'path':'','valid':false}
+  
+  $http.get('/configuration/directories').success((data) ->
+    $scope.seriesDirectory = data
+  )
+ 
+  $scope.validText = () ->
+    if($scope.seriesDirectory.valid)
+      "Valid"
+    else
+      "Not valid"
+  
+  $scope.changeSeriesDirectory = () ->
+    $http.post('/configuration/directories',{'path':$scope.seriesDirectory.path}).success((data) ->
+      $scope.seriesDirectory = data
+    )
+  
+  $scope.valid = () ->
+    $scope.users.length >=1 and $scope.seriesDirectory.valid
 
 mod.controller("ConfigController",Config.ConfigController)
 
