@@ -1,0 +1,13 @@
+@()
+
+@spa {
+  <script src="@routes.Assets.at("javascript/shows.js")" type="text/javascript"></script>
+  <script src="@routes.Assets.at("javascript/config.js")" type="text/javascript"></script>
+  <script src="@routes.Assets.at("javascript/app.js")" type="text/javascript"></script>
+  
+  <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+  <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/shows.css")">
+  <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/config.css")">
+} {
+  <div id="page" ng-view/>
+}

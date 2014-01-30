@@ -1,0 +1,53 @@
+#showTable {
+  display: table;
+  width: auto;
+  border-spacing:5px;
+}
+
+.cell {
+  display: table-column;
+  float: left;
+}
+
+.row {
+  display: table-row;
+  clear: both;
+  width: auto;
+}
+
+#showRowHeader {
+  .row;
+}
+
+#headerName {
+  .cell;
+  width: 30em;
+}
+
+#headerWatched {
+  .cell;
+  width: 10em;
+}
+
+#headerLatest {
+  .cell;
+}
+
+.show {
+  .row;
+}
+
+.showName {
+  .cell;
+  width: 30em;
+}
+
+.showWatchedStatus {
+  .cell;
+  width: 10em;
+  text-align: center;
+}
+
+.showLatest {
+  .cell;
+}

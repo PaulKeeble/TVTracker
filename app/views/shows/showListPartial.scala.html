@@ -1,0 +1,23 @@
+@()
+
+<span class="nav" ng-click="navConfig()">
+      Configuration
+</span>
+
+<h1>Shows</h1>
+  
+<div id="showTable">
+    
+  <div id="showRowHeader">
+    <span id="headerName">Name</span>
+    <span id="headerWatched">Episodes<br/>(Watched/Total)</span>
+    <span id="headerLatest">Latest Episode</span>
+  </div>
+
+  <div class="show" ng-repeat="show in shows">
+    <span class="showName">{{show.name}}</span>
+    <span class="showWatchedStatus">{{episodeSummary(show)}}</span>
+    <span class="showLatest">{{lastEpisodeDate(show)}}</span>
+  </div>
+      
+</div>

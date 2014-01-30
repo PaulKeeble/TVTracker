@@ -1,8 +1,6 @@
-window.Config = { }
+mod = angular.module("configuration",[])
 
-mod = angular.module("config",[])
-
-Config.ConfigController = ($scope,$http) -> 
+ConfigController = ($scope,$http) -> 
   $scope.users = []
   
   updateUsers = () -> $http.get('/configuration/users').success((data) ->
@@ -49,5 +47,5 @@ Config.ConfigController = ($scope,$http) ->
   $scope.valid = () ->
     $scope.users.length >=1 and $scope.seriesDirectory.valid
 
-mod.controller("ConfigController",Config.ConfigController)
+mod.controller("ConfigController",ConfigController)
 

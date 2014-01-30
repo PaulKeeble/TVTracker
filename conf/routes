@@ -3,18 +3,20 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                           controllers.Shows.show
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
+# Shows and how they are displayed
+GET     /shows/partial/list     controllers.Shows.showListPartial
+GET     /shows/partial/detail   controllers.Shows.showDetailPartial
+
 # Configuration settings
-GET     /configuration              controllers.Configurations.show
+GET     /config/partial/show        controllers.Configurations.show
+## Config json interface
 GET     /configuration/users        controllers.Configurations.users
 POST    /configuration/users        controllers.Configurations.addUser
 DELETE  /configuration/users/:name  controllers.Configurations.deleteUser(name:String)
 POST    /configuration/directories  controllers.Configurations.changeDirectory
 GET     /configuration/directories  controllers.Configurations.getDirectory
-
-# Shows and how they are displayed
-GET     /shows                      controllers.Shows.list
