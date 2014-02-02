@@ -1,1 +1,42 @@
 @()
+
+<span class="nav">
+      <a href="#/">Back to Shows</a>
+</span>
+
+<h1>{{show.name}}</h1>
+
+<div id="showDetails">
+  <dl>
+    <dt>Location</dt>
+    <dd>{{show.location}}</dd>
+  </dl>
+</div>
+
+<div id="seasonList">
+  <div class="season" ng-repeat="season in show.seasons">
+    <span class="seasonNumber">Season {{season.number}}</span>
+    
+    <div id="episodesTable">
+      <div id="episodesRowHeader">
+        <span id="headerEpisode">Episode</span>
+        <span id="headerName">Name</span>
+        <span id="headerFilename">Filename</span>
+        <span id="headerStatus">Status</span>
+        <span id="headerCreatedDate">Created Date</span>
+        <span id="headerActions">Action</span>
+      </div>
+
+      <div class="episode" ng-repeat="episode in season.episodes" ng-class="watchedHighlight(episode)">
+        <span class="episode">{{episode.number}}</span>
+        <span class="name">{{episode.name}}</span>
+        <span class="filename">{{episode.filename}}</span>
+        <span class="status">{{episode.watched}}</span>
+        <span class="createdDate">{{episode.createdDate}}</span>
+        <span class="actions">
+          <button ng-click="toggleWatch(season.number,episode)">{{watchActionText(episode)}}</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
