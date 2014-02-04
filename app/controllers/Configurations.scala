@@ -16,6 +16,10 @@ object Configurations extends Controller {
     Ok(views.html.config.show())
   }
   
+   def userSelector = Action { implicit request =>
+    Ok(views.html.config.userSelector())
+  }
+  
   def users = Action { implicit request =>
     val users = Configuration.users
     val jsonOfUsers = JsArray(

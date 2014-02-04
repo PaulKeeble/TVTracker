@@ -14,6 +14,7 @@ GET     /shows/partial/detail   controllers.Shows.showDetailPartial
 
 # Configuration settings
 GET     /config/partial/show        controllers.Configurations.show
+GET     /config/partial/userSelector controllers.Configurations.userSelector
 ## Config json interface
 GET     /configuration/users        controllers.Configurations.users
 POST    /configuration/users        controllers.Configurations.addUser

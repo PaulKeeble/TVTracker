@@ -1,0 +1,5 @@
+@()
+
+<div id="userSelector">
+  <select ng-model="currentUser" ng-options="u.name for u in users" ng-change="onChange()"></select>
+</div>

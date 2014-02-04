@@ -1,4 +1,4 @@
-mod = angular.module("trackerApp",['ngRoute','shows','configuration','showDetail'])
+mod = angular.module("trackerApp",['ngRoute','shows','configuration','showDetail','users'])
 
 mod.config(['$routeProvider',($routeProvider) ->
   $routeProvider.
