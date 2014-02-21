@@ -10,7 +10,9 @@ import play.api.db.DB
 
 case class User(name: String)
 
-case class Directory(path: String)
+case class Directory(path: String) {
+  def toFile = new File(path)
+}
 
 object Configuration {
   private val userParser = str("name") map { name => User(name) }

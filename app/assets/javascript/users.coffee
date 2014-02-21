@@ -40,7 +40,7 @@ class UserService
     
   defaultCurrentUser: () ->
     loaded = @storageService.get("currentUser")
-    console.log(loaded)
+
     if(loaded?)
       this.findUser(loaded)
     else
