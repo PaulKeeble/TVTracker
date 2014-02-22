@@ -4,6 +4,10 @@ import org.specs2.mutable.Specification
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
 import java.util.Date
+import models.Show
+import models.Season
+import models.Library
+import models.Episode
 
 @RunWith(classOf[JUnitRunner])
 class FilesystemLibrarySourceSpec extends Specification {

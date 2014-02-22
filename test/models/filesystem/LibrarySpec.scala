@@ -2,6 +2,7 @@ package models.filesystem
 
 import org.specs2.mutable.SpecificationWithJUnit
 import org.specs2.specification.Scope
+import models.Library
 
 class LibrarySpec extends SpecificationWithJUnit {
   "A library" should {

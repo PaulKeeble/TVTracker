@@ -1,6 +1,10 @@
 package models.filesystem
 
 import java.io.{File => jFile}
+import models.Show
+import models.Season
+import models.Library
+import models.Episode
 
 object FilesystemLibrarySource {
   type FE = (File,Extract)

@@ -16,7 +16,7 @@
     <span id="headerLatest">Latest Episode</span>
   </div>
 
-  <div class="show" ng-repeat="show in shows">
+  <div class="show" ng-repeat="show in library.shows">
     <span class="showName"><a href="#/shows/{{show.id}}">{{show.name}}</a></span>
     <span class="showWatchedStatus">{{show.episodes.watched}} / {{show.episodes.total}}</span>
     <span class="showLatest">{{show.lastCreated}}</span>

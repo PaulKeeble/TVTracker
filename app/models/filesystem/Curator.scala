@@ -1,13 +1,14 @@
 package models.filesystem
 
 import models.Configuration
+import models.Library
 
-class Curator {
+object Curator {
   def filesystemLibrary:Option[Library] = {
     Configuration.directory match {
       case Some(dir) => {
         val folders = FileSystemScanner.scanFrom(dir.toFile)
-        Option(FilesystemLibrarySource.createLibrary(folders))
+        Option(FilesystemLibrarySource.createFrom(folders))
       }
       case None => None
     }

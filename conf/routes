@@ -11,6 +11,7 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 # Shows and how they are displayed
 GET     /shows/partial/list     controllers.Shows.showListPartial
 GET     /shows/partial/detail   controllers.Shows.showDetailPartial
+GET     /shows/librarySummary   controllers.Shows.librarySummary
 
 # Configuration settings
 GET     /config/partial/show        controllers.Configurations.show
