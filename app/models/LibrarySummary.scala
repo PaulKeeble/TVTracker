@@ -7,7 +7,7 @@ case class EpisodesSummary(watched:Int,total:Int) {
   require(watched<=total)
 }
 
-case class ShowSummary(name:String,id:Int,episodes:EpisodesSummary,lastCreated:Date)
+case class ShowSummary(name:String,id:Long,episodes:EpisodesSummary,lastCreated:Date)
 
 object ShowSummary {
   def apply(show:Show) : ShowSummary = {
@@ -16,7 +16,7 @@ object ShowSummary {
     val lastCreated = show.allEpisodes.foldRight(util.epoch){(ep1,date) => 
       if(ep1.created < date) date else ep1.created
     }
-    val id = 0 //TODO need to give shows IDs for the detail page links
+    val id = show.id
     ShowSummary(show.name,id,EpisodesSummary(0,total),lastCreated)
   }
 }

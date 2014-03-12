@@ -2,15 +2,12 @@ package models.filesystem
 
 import org.specs2.mutable.Specification
 import org.junit.runner.RunWith
-import org.specs2.runner.JUnitRunner
 import java.util.Date
-import models.Show
-import models.Season
 import models.Library
-import models.Episode
+import org.specs2.runner.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class FilesystemLibrarySourceSpec extends Specification {
+class FilesystemLibrarySourceSpec extends Specification with LibraryBuilder { 
   val extensionFilter = new DefaultExtensionFilter
 
   "The Folders library source" should {
@@ -103,21 +100,5 @@ class FilesystemLibrarySourceSpec extends Specification {
       
       library must beEqualTo(expected)
     }
-  }
-  
-  def show(name:String,location:String)(seasons: => List[Season]) : List[Show] = {
-    List( Show(name,location,seasons) )
-  }
-  
-  def season(number:Int)(episodes: => List[Episode]): List[Season] = {
-    List(
-      Season(number,episodes)
-    )
-  }
-  
-  def episode(number:Int,title:String,fileName:String,created:Date) : List[Episode] = {
-    List(
-      Episode(number,title,fileName,created)
-    )
   }
 }

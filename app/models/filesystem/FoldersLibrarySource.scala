@@ -25,7 +25,7 @@ object FilesystemLibrarySource {
       
       val seasons = seasonObjects(extractsBySeason)
       
-      new Show(folder.name,folder.location,seasons)
+      new Show(0L,folder.name,folder.location,seasons)
     }
     
     new Library(shows)

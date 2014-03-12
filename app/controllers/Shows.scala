@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.api.data._
 import models.filesystem.Curator
 import play.api.libs.json._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 import models.LibrarySummary
  
@@ -21,12 +22,14 @@ object Shows extends Controller {
     Ok(views.html.shows.showDetailPartial())
   }
   
-  def librarySummary = Action {
+  def librarySummary = Action.async {
     import LibraryWrites._
     
-    val library = Curator.filesystemLibrary
-    val summary = library.map(LibrarySummary(_))
-    val json = summary.map(s => Json.toJson(s)).getOrElse(JsNull)
-    Ok(json)
+    val libraryFuture = Curator.curateDatabase
+    libraryFuture map { library =>
+      val summary = library.map(LibrarySummary(_))
+      val json = summary.map(s => Json.toJson(s)).getOrElse(JsNull)
+      Ok(json)
+    }
   }
 }

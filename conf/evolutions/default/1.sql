@@ -3,11 +3,11 @@
 # --- !Ups
 
 CREATE TABLE Users (
-    name varchar(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE Directories (
-    path varchar(512) NOT NULL,
+    path VARCHAR(1024) NOT NULL,
 );
  
 # --- !Downs

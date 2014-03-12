@@ -1,7 +1,10 @@
 package models.filesystem
 
-import models.Configuration
-import models.Library
+import util.diff.Diff
+import models.LibraryDiff._
+import models._
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Curator {
   def filesystemLibrary:Option[Library] = {
@@ -11,6 +14,16 @@ object Curator {
         Option(FilesystemLibrarySource.createFrom(folders))
       }
       case None => None
+    }
+  }
+  
+  def curateDatabase : Future[Option[Library]] = Future {
+    filesystemLibrary map { fsLib =>
+      val dbLib = Library.load
+    
+      val difference = Diff.diffSingle(fsLib,dbLib)
+      LibraryDatabase.updateLibrary(difference)
+      Library.load
     }
   }
 }
