@@ -1,23 +1,13 @@
 mod = angular.module('showDetail',[])
 
-ShowDetailController = ($scope,$http,$location) ->
-  $scope.show = 
-    {'name':'ShowDetail','location':'/home/share/Series/AShow','seasons':
-      [
-        {'number':1,'episodes':
-          [
-            {'number':1,'name':'epi 1-1','filename':'Additional Seasons - S01E01 - epi1-1.mkv','watched':false,'createdDate':'2014-01-03'},
-            {'number':2,'name':'epi 1-2','filename':'Additional Seasons - S01E02 - epi1-2.mkv','watched':false,'createdDate':'2014-01-11'}
-          ]
-        },
-        {'number':2,'episodes':
-          [
-            {'number':1,'name':'epi 2-1','filename':'Additional Seasons - S02E01 - epi2-1.mkv','watched':false,'createdDate':'2014-02-01'},
-            {'number':2,'name':'epi 2-2','filename':'Additional Seasons - S02E02 - epi2-2.mkv','watched':false,'createdDate':'2014-02-02'}
-          ]
-        }
-      ]
-    }
+ShowDetailController = ($scope,$http,$routeParams) ->
+  $scope.show = {}
+    
+  showId = $routeParams.showId
+  
+  $http.get('/shows/'+showId).success((data) ->
+      $scope.show = data
+    )
   
   findEpisode = (seasonNumber,episodeNumber) ->
     seasons = (season for season in $scope.show.seasons when season.number == seasonNumber)

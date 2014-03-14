@@ -3,22 +3,25 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Shows.show
+GET     /                            controllers.Shows.show
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file                controllers.Assets.at(path="/public", file)
 
 # Shows and how they are displayed
-GET     /shows/partial/list     controllers.Shows.showListPartial
-GET     /shows/partial/detail   controllers.Shows.showDetailPartial
-GET     /shows/librarySummary   controllers.Shows.librarySummary
+GET     /shows/partial/list          controllers.Shows.showListPartial
+GET     /shows/partial/detail        controllers.Shows.showDetailPartial
+## json interface
+GET     /shows/librarySummary        controllers.Shows.librarySummary
+GET     /shows/librarySummary/latest controllers.Shows.refresh
+GET     /shows/:id                   controllers.Shows.detail(id:Int)
 
 # Configuration settings
-GET     /config/partial/show        controllers.Configurations.show
+GET     /config/partial/show         controllers.Configurations.show
 GET     /config/partial/userSelector controllers.Configurations.userSelector
 ## Config json interface
-GET     /configuration/users        controllers.Configurations.users
-POST    /configuration/users        controllers.Configurations.addUser
-DELETE  /configuration/users/:name  controllers.Configurations.deleteUser(name:String)
-POST    /configuration/directories  controllers.Configurations.changeDirectory
-GET     /configuration/directories  controllers.Configurations.getDirectory
+GET     /configuration/users         controllers.Configurations.users
+POST    /configuration/users         controllers.Configurations.addUser
+DELETE  /configuration/users/:name   controllers.Configurations.deleteUser(name:String)
+POST    /configuration/directories   controllers.Configurations.changeDirectory
+GET     /configuration/directories   controllers.Configurations.getDirectory

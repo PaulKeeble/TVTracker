@@ -7,6 +7,8 @@
 <user-selector on-user-change='userChanged'></user-selector>
 
 <h1>Shows</h1>
+
+<button ng-click="refresh()">Refresh</button>
   
 <div id="showTable">
     
@@ -16,7 +18,7 @@
     <span id="headerLatest">Latest Episode</span>
   </div>
 
-  <div class="show" ng-repeat="show in library.shows">
+  <div class="show" ng-repeat="show in library.shows | orderBy:'name'">
     <span class="showName"><a href="#/shows/{{show.id}}">{{show.name}}</a></span>
     <span class="showWatchedStatus">{{show.episodes.watched}} / {{show.episodes.total}}</span>
     <span class="showLatest">{{show.lastCreated}}</span>

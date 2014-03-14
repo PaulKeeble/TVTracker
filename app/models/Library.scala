@@ -1,7 +1,6 @@
 package models
 
 import play.api.db.DB
-import play.api.Play.current
 import anorm.SqlParser._
 import anorm._
 
@@ -26,7 +25,9 @@ case class Show(id: Long, name: String, location: String, seasons: List[Season])
   def numberOfEpisodes = allEpisodes.length
 }
 
-case class Library(shows: List[Show])
+case class Library(shows: List[Show]) {
+  def findShow(id:Int) = shows.find(_.id == id)
+}
 
 object Library {
   def load: Library = DB.withConnection { implicit connection =>
@@ -48,5 +49,7 @@ object Library {
     }
     
     Library(shows.toList)
-  }
+  }(play.api.Play.current)
+  
+  def current: Library = load
 }
