@@ -12,6 +12,7 @@ object LibraryWrites {
         "number" -> e.number,
         "title" -> e.title,
         "filename" -> e.filename,
+        "watched" -> false,
         "created" -> e.created
       )
     }
