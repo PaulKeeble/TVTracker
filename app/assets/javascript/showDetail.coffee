@@ -1,11 +1,13 @@
-mod = angular.module('showDetail',[])
+mod = angular.module('showDetail',['users'])
 
-ShowDetailController = ($scope,$http,$routeParams) ->
+ShowDetailController = ($scope,$http,$routeParams,userService) ->
   $scope.show = {}
     
   showId = $routeParams.showId
   
-  $http.get('/shows/'+showId).success((data) ->
+  userName = () -> userService.currentUser.name
+  
+  $http.get('/shows/'+userName+'/'+showId).success((data) ->
       $scope.show = data
     )
   
@@ -24,6 +26,12 @@ ShowDetailController = ($scope,$http,$routeParams) ->
   
   $scope.toggleWatch = (seasonNumber,episode) ->
       episode.watched = not episode.watched
+      
+      user = userService.currentUser
+      if(episode.watched)
+        $http.post('/episode/'+episode.id+'/watch',user)
+      else
+        $http.post('/episode/'+episode.id+'/unwatch',user)
   
   $scope.watchActionText = (episode) ->
     if(episode.watched)
@@ -33,6 +41,9 @@ ShowDetailController = ($scope,$http,$routeParams) ->
   
   $scope.watchedHighlight = (episode) ->
     "watchedHighlight" if episode.watched
+  
+  $scope.userChanged = (newUser) ->
+    console.log("received UCE " + newUser.name)
     
 
 mod.controller("ShowDetailController",ShowDetailController)

@@ -1,6 +1,7 @@
 package models.filesystem
 
 import scala.util.parsing.combinator.RegexParsers
+import scala.language.postfixOps
 
 case class Extract(showname:String,season:Int,episodes:List[Int],title:String)
 
@@ -10,11 +11,11 @@ object FilenameParser extends RegexParsers {
   
   def minus: Parser[String] = "-"
     
-  def seasonMarker: Parser[String] = "S" | "s"
+  //def seasonMarker: Parser[String] = "S" | "s"
   
-  def season: Parser[Int] = seasonMarker ~> number
+  def season: Parser[Int] = number
   
-  def episodeMarker: Parser[String] = "E" | "e"
+  def episodeMarker: Parser[String] = "x" | "X"
   
   def episode: Parser[Int] = episodeMarker ~> number
   

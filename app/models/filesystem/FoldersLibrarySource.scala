@@ -34,7 +34,7 @@ object FilesystemLibrarySource {
   //TODO: Make global logging
   def logBad(failedExtracts:Seq[File]) = {
     failedExtracts.foreach { f=>
-      println(f.name)
+      println("Failed Extract: " + f.name)
     }
   }
   

@@ -15,9 +15,9 @@ case class File(name:String,modified:Date)
 object FileSystemScanner {
   def scanFrom(base:JFile) : List[Folder] = {
     val shows = base.listFiles()
-    val showObjs = shows.par.map { showFolder =>
+    val showObjs = shows.map { showFolder =>  //par
       val episodeFiles = showFolder.listFiles()
-      val episodes = episodeFiles.par.map { episodeFile =>
+      val episodes = episodeFiles.map { episodeFile =>  //par
         new File(episodeFile.getName,new Date(episodeFile.lastModified))
       }.seq
       

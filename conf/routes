@@ -12,9 +12,13 @@ GET     /assets/*file                controllers.Assets.at(path="/public", file)
 GET     /shows/partial/list          controllers.Shows.showListPartial
 GET     /shows/partial/detail        controllers.Shows.showDetailPartial
 ## json interface
-GET     /shows/librarySummary        controllers.Shows.librarySummary
-GET     /shows/librarySummary/latest controllers.Shows.refresh
-GET     /shows/:id                   controllers.Shows.detail(id:Int)
+GET     /shows/librarySummary/:user        controllers.Shows.librarySummary(user)
+GET     /shows/librarySummary/:user/latest controllers.Shows.refresh(user)
+GET     /shows/:user/:id                   controllers.Shows.detail(user,id:Long)
+
+# Watched Episodes
+POST    /episode/:episodeId/watch    controllers.Episodes.watch(episodeId: Long)
+POST    /episode/:episodeId/unwatch  controllers.Episodes.unwatch(episodeId: Long)
 
 # Configuration settings
 GET     /config/partial/show         controllers.Configurations.show

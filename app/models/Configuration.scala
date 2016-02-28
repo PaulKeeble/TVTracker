@@ -31,7 +31,7 @@ object Configuration {
     SQL("delete from Users where name={name}")
       .on("name" -> u.name).executeUpdate()
   }
-
+  
   def validScanDirectory(path: String): Boolean = {
     val candidateFile = new File(path)
     candidateFile.canRead() && candidateFile.isDirectory()

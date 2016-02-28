@@ -10,7 +10,7 @@ import util.diff.Subtract
 import util.diff.Diffable
 import util.diff.Add
 
-case class Episode(number: Int, title: String, filename: String, created: Date) {
+case class Episode(number: Int, title: String, filename: String, created: Date,id:Long=0L,watched:Boolean = false) {
   def <(that: Episode): Boolean = number < that.number
   def >(that: Episode): Boolean = number > that.number
 }
@@ -26,7 +26,18 @@ case class Show(id: Long, name: String, location: String, seasons: List[Season])
 }
 
 case class Library(shows: List[Show]) {
-  def findShow(id:Int) = shows.find(_.id == id)
+  def findShow(id:Long) = shows.find(_.id == id)
+  
+  def mapEpisodes(f:(Show,Season,Episode)=>Episode ) = {
+    val newShows = shows.map{ show => 
+      val newSeasons = show.seasons.map { season => 
+        val newEpisodes = season.episodes.map { episode => f(show,season,episode)}
+        season.copy(episodes = newEpisodes)
+      }
+      show.copy(seasons=newSeasons)
+    }
+    copy(shows=newShows)
+  }
 }
 
 object Library {
@@ -41,7 +52,7 @@ object Library {
       val bySeason = rows.groupBy(_._5)
 
       val seasons = bySeason.map { case (season, rows) =>
-        val episodes = rows.map(r => Episode(r._6, r._7, r._8, r._9))
+        val episodes = rows.map(r => Episode( r._6, r._7, r._8, r._9,r._4))
         Season(season, episodes)
       }
 

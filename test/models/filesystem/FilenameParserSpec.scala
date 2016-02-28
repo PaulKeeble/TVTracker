@@ -10,36 +10,36 @@ import org.specs2.mutable.Specification
 class FilenameParserSpec extends Specification{
   "FilenameExtractor" should {
     "find elements for simple name" in {
-      check("Showname - S01E01 - a title.mkv", Extract("Showname",1,List(1),"a title"))
+      check("Showname - 1x01 - a title.mkv", Extract("Showname",1,List(1),"a title"))
     }
     
     "find elements for bracket showname" in {
-      check("Brackets - S01E01 - title (1).mkv", Extract("Brackets",1,List(1),"title (1)"))
+      check("Brackets - 1x01 - title (1).mkv", Extract("Brackets",1,List(1),"title (1)"))
     }
     
     "find elements for lower case season and episode" in {
-      check("lowercase - s01e01 - title.mkv",Extract("lowercase",1,List(1),"title"))
+      check("lowercase - 1x01 - title.mkv",Extract("lowercase",1,List(1),"title"))
     }
     
     "find elements for high numbered season and episode" in {
-      check("numbered - s22e037 - title.mkv",Extract("numbered",22,List(37),"title"))
+      check("numbered - 22x037 - title.mkv",Extract("numbered",22,List(37),"title"))
     }
     
     "find elements for punction title" in {
-      check("Showname - S01E01 - I,s...R\u00F4;ti'!-&.mkv", Extract("Showname",1,List(1),"I,s...R\u00F4;ti'!-&"))
+      check("Showname - 1x01 - I,s...R\u00F4;ti'!-&.mkv", Extract("Showname",1,List(1),"I,s...R\u00F4;ti'!-&"))
     }
     
     "should accept files without extensions" in {
       
-      check("Showname - S01E01 - title",Extract("Showname",1,List(1),"title"))
+      check("Showname - 1x01 - title",Extract("Showname",1,List(1),"title"))
     }
     
     "should find multiple episode markers" in {
-      check("Showname - S01E01E02 - title",Extract("Showname",1,List(1,2),"title"))
+      check("Showname - 1x01x02 - title",Extract("Showname",1,List(1,2),"title"))
     }
     
     "should fail when no episodes at all" in {
-      FilenameParser.parse("Showname - S01 - title") must beNone
+      FilenameParser.parse("Showname - 1 - title") must beNone
     }
   }
   

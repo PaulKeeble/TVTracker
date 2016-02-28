@@ -7,7 +7,8 @@ import models.filesystem.Curator
 import play.api.libs.json._
 import scala.concurrent.ExecutionContext.Implicits.global
 import models.LibrarySummary
-import models.Library
+import models.Watching
+import models.User
  
 object Shows extends Controller {
   def show = Action {
@@ -22,7 +23,7 @@ object Shows extends Controller {
     Ok(views.html.shows.showDetailPartial())
   }
   
-  def refresh = Action.async {
+  def refresh(user:String) = Action.async {
     import LibraryWrites._
     val libraryFuture = Curator.curateDatabase
     libraryFuture map { library =>
@@ -32,16 +33,16 @@ object Shows extends Controller {
     }
   }
   
-  def librarySummary = Action {
+  def librarySummary(user:String) = Action {
     import LibraryWrites._
-    val library = Library.current
+    val library = Watching.library(User(user))
     val summary = LibrarySummary(library)
     val json = Json.toJson(summary)
     Ok(json)
   }
   
-  def detail(showId:Int) = Action {
-    val library = Library.current
+  def detail(user:String,showId:Long) = Action {
+    val library = Watching.library(User(user))
     library.findShow(showId) match {
       case Some(show) => {
         import LibraryWrites._

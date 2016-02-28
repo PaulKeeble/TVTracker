@@ -9,10 +9,11 @@ object LibraryWrites {
   implicit val episodeWrites = new Writes[Episode] {
     def writes(e:Episode) : JsValue = {
       Json.obj(
+        "id" -> e.id,
         "number" -> e.number,
         "title" -> e.title,
         "filename" -> e.filename,
-        "watched" -> false,
+        "watched" -> e.watched,
         "created" -> e.created
       )
     }

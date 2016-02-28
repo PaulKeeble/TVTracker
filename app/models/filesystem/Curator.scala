@@ -10,8 +10,9 @@ object Curator {
   def curateDatabase : Future[Option[Library]] = Future {
     filesystemLibrary map { fsLib =>
       val dbLib = Library.load
-    
+      
       val difference = Diff.diffSingle(fsLib,dbLib)
+      println("differences="+difference)
       LibraryDatabase.updateLibrary(difference)
       Library.load
     }

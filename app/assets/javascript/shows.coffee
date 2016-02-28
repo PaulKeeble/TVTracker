@@ -1,18 +1,20 @@
-mod = angular.module("shows",[])
+mod = angular.module("shows",['users'])
 
-ShowListController = ($scope,$http,$location) ->
+ShowListController = ($scope,$http,$location,userService) ->
   $scope.library = {}
   
-  $http.get('/shows/librarySummary').success((data) ->
+  userName = () -> userService.currentUser.name
+  
+  $http.get('/shows/librarySummary/'+userName()).success((data) ->
     $scope.library = data
   )
   
   $scope.userChanged = (newUser) ->
-    console.log("received UCE " + newUser.name)
+    console.log("received UCE " + userName())
     
   $scope.refresh = () ->
     
-    $http.get('/shows/librarySummary/latest').success((data) ->
+    $http.get('/shows/librarySummary/'+userService.currentUser.name+'/latest').success((data) ->
       $scope.library = data
     )
 
